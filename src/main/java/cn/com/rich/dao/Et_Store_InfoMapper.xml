@@ -109,6 +109,9 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="maxId" resultType="Integer" >
+    select Max(ID) from et_store_info
+  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

@@ -34,4 +34,6 @@ public interface Et_Store_InfoMapper {
     int updateByPrimaryKeyWithBLOBs(Et_Store_InfoWithBLOBs record);
 
     int updateByPrimaryKey(Et_Store_Info record);
+    
+    int maxId();
 }

@@ -12,6 +12,9 @@
 		http://www.springframework.org/schema/aop/spring-aop-3.1.xsd 
 		http://www.springframework.org/schema/tx 
 		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd ">
-<bean id="testService" class="cn.com.rich.service.impl.TestServiceImpl"/>
-
+	<bean id="testService" class="cn.com.rich.service.impl.TestServiceImpl"/>
+	<!-- 商家信息操作 -->
+	<bean id="etStoreInfoService" class="cn.com.rich.service.impl.EtStoreInfoServiceImpl"/>
+	<!-- 商家种类操作 -->
+	<bean id="rtStoreTypeService" class="cn.com.rich.service.impl.RtStoreTypeServiceImpl"/>
 </beans>
