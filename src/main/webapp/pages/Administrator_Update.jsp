@@ -66,6 +66,7 @@
 			<div class="mem_tit1">
 				<button style="background-color: orange;" class="m_btn" onclick="window.location.href='Administrator.jsp'">返回搜索</button>
 			</div>
+			<h2 align="center">修改商户信息</h2>
             <div class="mem_tit1">商户信息</div>
            
             <table id="tab1" border="0" class="order_tab" style="width:1100px; text-align:center; cellspacing="0" cellpadding="0">

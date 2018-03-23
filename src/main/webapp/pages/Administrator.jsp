@@ -42,6 +42,11 @@
 		   }
 		   
 	}
+	function seachByNum(obj) {
+		var $Num =$(obj).prev().val();
+		alert("搜索不到"+$Num);
+		
+	}
 	</script>
 <title>邛崃市云联惠</title>
 </head>
@@ -51,10 +56,8 @@
     <div class="top">
         <div class="m_logo"><a href="../index.jsp"><img src="../Picture/logo1.png" /></a></div>
         <div class="m_search">
-            <form>
                 <input type="text" value="" placeholder="输入商户准确电话号并查询" class="m_ipt" />
-                <input type="submit" value="搜索" class="m_btn"/>
-            </form>                      
+                <button class="m_btn" onclick="seachByNum(this);">搜索</button>
         </div>
         
     </div>
@@ -70,23 +73,36 @@
                 <td width="220">
                 	<select class="jj" name="order1">
                       <option value="&" selected="selected">任意</option>
-                      <option value="1">2015092626589</option>
-                      <option value="2">2015092626589</option>
-                      <option value="3">2015092626589</option>
-                      <option value="4">2015092626589</option>
+                      <option value="1">餐饮</option>
+                      <option value="2">服装</option>
+                      <option value="3">汽车</option>
+                      <option value="4">房产</option>
                     </select>
                 </td>
                 <td width="100" align="right">商户名字</td> 
                 <td width="220">
                 	<input style="width: 90%;" value=""/>
                 </td>
-                <td><a href="#"><div class="btn_u">点击查找</div></a></td>
-                <td><a href="Administrator_Insert.jsp"><div class="btn_u">添加新商户</div></a></td>
+                <td><button class="btn_u">点击查找</button></td>
               </tr>
               <tr>
-                <td colspan="6" height="" style="font-family:'宋体'; padding:20px 10px 20px 10px;">
+                <td colspan="5" height="" style="font-family:'宋体'; padding:20px 10px 20px 10px;">
                 	商户类型选择任意时，不作为筛选条件 <br />
                 	商户名字支持模糊搜索（列如：输入“火店” 即可搜索出“火锅店”），不填默认全部搜索
+                </td>
+              </tr>
+              </table>
+              <br />
+              <table border="0" class="order_tab" style="width:1100px;"  cellspacing="0" cellpadding="0">
+              <tr>
+                <td height="" width="15%" style="font-family:'宋体'; padding:5px;">
+                	<button class="btn_u" onclick="window.location.href='Administrator_Insert.jsp'">添加新商户</button>
+                </td>
+                <td width="15%" style="font-family:'宋体'; padding:5px;">
+                	<button class="btn_u" onclick="window.location.href='Administrator_Insert_Type.jsp'">添加新分类</button>
+                </td>
+                <td width="70%" style="font-family:'宋体'; padding:5px;">
+                	<button class="btn_u" onclick="window.location.href='Administrator_Notice.jsp'">修改公告</button>
                 </td>
               </tr>
             </table>
@@ -140,7 +156,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -150,7 +166,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -160,7 +176,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -170,7 +186,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -180,7 +196,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -190,7 +206,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -200,7 +216,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -210,7 +226,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -220,7 +236,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>
@@ -230,7 +246,7 @@
                 	<button>删&nbsp;除</button>
                 </td>
               </tr>
-              <tr height="30">
+              <tr>
               	<td>1</td>
                 <td><font color="#ff4e00">2015092823056</font></td>
                 <td>四川省成都市。。。。。。。。</td>

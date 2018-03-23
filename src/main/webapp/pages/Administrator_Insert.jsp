@@ -110,6 +110,7 @@
 					<button style="background-color: orange;" class="m_btn"
 						onclick="window.location.href='Administrator.jsp'">返回搜索</button>
 				</div>
+				<h2 align="center">添加商户信息</h2>
 				<div class="mem_tit1">商户信息</div>
 				<form action="../etStoreInfoService/doInsert.do" id="Form_Insert"
 					name="Form_Insert" method="post">
@@ -141,7 +142,7 @@
 						</tr>
 						<tr>
 							<td width="30%" height="30">商户描述</td>
-							<td width="70%" align="left"><textarea rows="5px"
+							<td width="70%" align="left"><textarea rows="5px" style="resize:none"
 									placeholder="请填写商户描述" cols="80px" id="storeDescribe"
 									name="storeDescribe"></textarea></td>
 						</tr>
