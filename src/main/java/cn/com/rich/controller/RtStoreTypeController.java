@@ -26,6 +26,7 @@ public class RtStoreTypeController {
 	@ResponseBody
 	// url
 	@RequestMapping("/doInsertInit")
+	// 查询种类分类表中所有数据
 	public String selectByExample(Model model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		//集合初始化

@@ -207,12 +207,60 @@
       </if>
     </trim>
   </insert>
+  <!-- 20180326 start -->
   <select id="countByExample" parameterType="cn.com.rich.entity.Et_Store_InfoExample" resultType="java.lang.Integer" >
     select count(*) from et_store_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+  <select id="selectByLmit" parameterType="map" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" /> 
+    from et_store_info 
+    where 1 = 1 
+    <if test="storephone != null" >
+    	and store_phone = #{storePhone,jdbcType=VARCHAR} 
+    </if>
+    <if test="id != null" >
+    	and id = #{id,jdbcType=VARCHAR} 
+    </if>
+    <if test="storeTypeId != null" >
+    	and store_type_id = #{storeTypeId,jdbcType=VARCHAR} 
+    </if>
+    <if test="storeName != null" >
+    	and store_name like #{storeName,jdbcType=VARCHAR} 
+    </if>
+    <if test="gmtCreate != null" >
+    	and gmt_create = #{gmtCreate,jdbcType=VARCHAR} 
+    </if>
+    order by CAST(id as SIGNED INTEGER)  
+    <if test="start != null and end != null" >
+    	limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER} 
+    </if>
+  </select>
+  <select id="selectByLmitCount" parameterType="map" resultType="java.lang.Integer" >
+    select 
+    count(*) 
+    from et_store_info 
+    where 1 = 1 
+    <if test="storephone != null" >
+    	and store_phone = #{storePhone,jdbcType=VARCHAR} 
+    </if>
+    <if test="id != null" >
+    	and id = #{id,jdbcType=VARCHAR} 
+    </if>
+    <if test="storeTypeId != null" >
+    	and store_type_id = #{storeTypeId,jdbcType=VARCHAR} 
+    </if>
+    <if test="storeName != null" >
+    	and store_name like #{storeName,jdbcType=VARCHAR} 
+    </if>
+    <if test="rgmtCreate != null" >
+    	and gmt_create = #{gmtCreate,jdbcType=VARCHAR} 
+    </if>
+  </select>
+  <!-- 20180326 end -->
   <update id="updateByExampleSelective" parameterType="map" >
     update et_store_info
     <set >

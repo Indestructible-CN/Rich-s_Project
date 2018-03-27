@@ -1,5 +1,8 @@
 package cn.com.rich.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.com.rich.dao.Et_Store_InfoMapper;
@@ -23,6 +26,20 @@ public class EtStoreInfoServiceImpl implements EtStoreInfoService {
 	@Override
 	public int maxId() {
 		return esim.maxId();
+	}
+	/**
+	 * @param [Map]  
+	 * record 对应  Et_Store_InfoWithBLOBs 对象
+	 * limit 对应 分页 开始 和 结束
+	 * @return 对象集合
+	 */
+	@Override
+	public List<Et_Store_InfoWithBLOBs> selectByLmit(Map<String, Object> m) {
+		return esim.selectByLmit(m);
+	}
+	@Override
+	public int selectByLmitCount(Map<String, Object> m) {
+		return esim.selectByLmitCount(m);
 	}
 
 }

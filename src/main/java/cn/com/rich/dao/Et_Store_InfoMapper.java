@@ -4,6 +4,8 @@ import cn.com.rich.entity.Et_Store_Info;
 import cn.com.rich.entity.Et_Store_InfoExample;
 import cn.com.rich.entity.Et_Store_InfoWithBLOBs;
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface Et_Store_InfoMapper {
@@ -36,4 +38,8 @@ public interface Et_Store_InfoMapper {
     int updateByPrimaryKey(Et_Store_Info record);
     
     int maxId();
+    
+    List<Et_Store_InfoWithBLOBs> selectByLmit(Map<String, Object> m);
+    
+    int selectByLmitCount(Map<String, Object> m);
 }
