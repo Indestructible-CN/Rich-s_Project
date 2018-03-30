@@ -118,15 +118,13 @@
 						style="width: 1100px; text-align: center; cellspacing: 0; cellpadding: 0;">
 						<tr>
 							<td width="30%" height="30">商家名称</td>
-							<td width="70%" align="left"><input type="text"
-								placeholder="请填写商家名称" id="storeName" name="storeName" value="" /></td>
+							<td width="70%" align="left"><input type="text" maxlength="20"
+								placeholder="请填写商家名称 最大长度20" id="storeName" name="storeName" value="" /></td>
 						</tr>
 						<tr>
 							<td width="30%" height="30">商户所属分类</td>
 							<td width="70%" align="left"><select id="storeTypeId"
-								name="storeTypeId">
-
-							</select></td>
+								name="storeTypeId"></select></td>
 						</tr>
 						<tr>
 							<td width="30%" height="30">商户电话</td>
@@ -137,14 +135,14 @@
 						<tr>
 							<td width="30%" height="30">商户地址</td>
 							<td width="70%" align="left"><input type="text"
-								placeholder="请填写商户地址" id="storeAddress" name="storeAddress"
+								placeholder="请填写商户地址 最大长度30" id="storeAddress" name="storeAddress" maxlength="30"
 								value="" /></td>
 						</tr>
 						<tr>
 							<td width="30%" height="30">商户描述</td>
-							<td width="70%" align="left"><textarea rows="5px" style="resize:none"
-									placeholder="请填写商户描述" cols="80px" id="storeDescribe"
-									name="storeDescribe"></textarea></td>
+							<td width="70%" align="left"><textarea rows="5px"
+									style="resize: none" placeholder="请填写商户描述 最大长度100" cols="80px"  maxlength="100"
+									id="storeDescribe" name="storeDescribe"></textarea></td>
 						</tr>
 					</table>
 				</form>

@@ -15,4 +15,9 @@ public interface EtStoreInfoService {
 	
 	public int selectByLmitCount(Map<String, Object> m);
 	
+	public int updateByPrimaryKeySelective(Et_Store_InfoWithBLOBs record);
+	
+	public Et_Store_InfoWithBLOBs selectByPrimaryKey(String id);
+	
+	
 }

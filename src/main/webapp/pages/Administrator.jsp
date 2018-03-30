@@ -63,7 +63,7 @@
 							$('#tab_tbody').append("<tr><td>"+item.id+"</td><td><font color='#ff4e00'>"+
 									item.storeName+"</font></td><td>"+
 									item.storeAddress+"</td><td>"+
-									item.storePhone+"</td><td><button onclick='window.location.href='Administrator_Update.jsp''>查/改</button>&nbsp;<button onclick='delete_cfm(this);'>删&nbsp;除</button></td></tr>");
+									item.storePhone+"</td><td><button onclick='seachById(this);'>查/改</button>&nbsp;<button onclick='delete_cfm(this);'>删&nbsp;除</button></td></tr>");
 						});
 					}
 				});
@@ -75,16 +75,31 @@
 	}
 	function delete_cfm(d){
 			var msg = "确认删除吗？";
-			if(confirm(msg)==true){/*
+			if(confirm(msg)==true){
 			var $id =$(d).parent().parent().children().first().html();
-			$.post("DeleteStudentsById?stuId="+$id,null,function(data){
-	        alert(data);
-	        window.location.href="SelectAllStudents?page="+${stupage};
-	    	});*/
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"id" : $id
+				},
+				url : "../etStoreInfoService/deleteById.do",//url
+				success : function(result) {
+					alert("删除成功！");
+					doSeach("<span>点击跳转</span>");
+				},
+				error : function(result) {
+					alert("删除失败！");
+				}
+			});
 				return true;
 			}else{
 				return false;
 			}
+	}
+	function seachById(obj){
+		var $id =$(obj).parent().parent().children().first().html();
+		window.location.href="Administrator_Update.jsp?id="+$id;
 	}
 	function check_page(){
 		var i = $("#nowPage");
@@ -104,13 +119,18 @@
 		   }
 		   
 	}
-	function seachByNum(obj) {
-		var $Num =$(obj).prev().val();
-		alert("搜索不到"+$Num);
-		
+	/* 验证电话号码是否正确 */
+	function checkPhone(str) {
+		/* 手机号码验证 */
+		var re = /^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
+		/* 固定电话验证 */
+		var re1 = /\d{3}-\d{8}|\d{4}-\d{7}$/;
+		if (!re.test(str) && !re1.test(str)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-	
-	
 	
 	//List 0	storePhone
 	//List 1	id
@@ -124,6 +144,7 @@
 		var nowPage = $("#nowPage").val();
 		var storeTypeId = $("#storeTypeId").val();
 		var storeName = $("#storeName").val();
+		var storePhone = $("#storePhone").val();
 		var flag = $(obj).html();
 		
 		var nowPageTMP = "1";
@@ -159,7 +180,7 @@
 				type : "POST",//方法类型
 				dataType : "JSON",//预期服务器返回的数据类型
 				data : {
-					"storePhone":null,
+					"storePhone":storePhone,
 					"idItem":null,
 					"storeTypeId":storeTypeId,
 					"storeName":storeName,
@@ -187,13 +208,13 @@
 								$('#tab_tbody').append("<tr><td>"+item.id+"</td><td><font color='#ff4e00'>"+
 										item.storeName+"</font></td><td>"+
 										item.storeAddress+"</td><td>"+
-										item.storePhone+"</td><td><button onclick='window.location.href='Administrator_Update.jsp''>查/改</button>&nbsp;<button onclick='delete_cfm(this);'>删&nbsp;除</button></td></tr>");
+										item.storePhone+"</td><td><button onclick='seachById(this);'>查/改</button>&nbsp;<button onclick='delete_cfm(this);'>删&nbsp;除</button></td></tr>");
 							});
 						}
 					});
 				},
 				error : function(result) {
-					alert("初始化失败！");
+					alert("查询失败！");
 				}
 			});
 		
@@ -207,7 +228,7 @@
     <div class="top">
         <div class="m_logo"><a href="../index.jsp"><img src="../Picture/logo1.png" /></a></div>
         <div class="m_search">
-                <input type="text" value="" placeholder="输入商户准确电话号并查询" class="m_ipt" />
+                <input type="text" id="storePhone" value="" placeholder="输入商户准确电话号并查询" class="m_ipt" />
                 <button class="m_btn" onclick="doSeach(this);">搜索</button>
         </div>
         

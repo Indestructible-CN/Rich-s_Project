@@ -109,9 +109,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="maxId" resultType="Integer" >
-    select Max(ID) from et_store_info
-  </select>
   <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -216,10 +213,11 @@
   </select>
   <select id="selectByLmit" parameterType="map" resultMap="ResultMapWithBLOBs" >
     select 
-    <include refid="Base_Column_List" /> 
+    <include refid="Base_Column_List"  /> 
+    <include refid="Blob_Column_List" /> 
     from et_store_info 
-    where 1 = 1 
-    <if test="storephone != null" >
+    where 1 = 1 and IS_DELETE ="n"
+    <if test="storePhone != null" >
     	and store_phone = #{storePhone,jdbcType=VARCHAR} 
     </if>
     <if test="id != null" >
@@ -243,8 +241,8 @@
     select 
     count(*) 
     from et_store_info 
-    where 1 = 1 
-    <if test="storephone != null" >
+    where 1 = 1 and IS_DELETE ="n"
+    <if test="storePhone != null" >
     	and store_phone = #{storePhone,jdbcType=VARCHAR} 
     </if>
     <if test="id != null" >
@@ -259,6 +257,10 @@
     <if test="rgmtCreate != null" >
     	and gmt_create = #{gmtCreate,jdbcType=VARCHAR} 
     </if>
+  </select>
+  
+  <select id="maxId" resultType="Integer" >
+    select Max(CONVERT(ID,SIGNED)) from et_store_info
   </select>
   <!-- 20180326 end -->
   <update id="updateByExampleSelective" parameterType="map" >
