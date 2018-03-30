@@ -5,8 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../Scripts/jquery-1.11.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+		window.location.href="../pages/Login.jsp";
+	});
+</script>
 </head>
 <body>
-<h1>Fail</h1>
 </body>
 </html>

@@ -255,4 +255,9 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <select id="login" parameterType="cn.com.rich.entity.Et_Admin" resultType="cn.com.rich.entity.Et_Admin">
+   select * from et_admin 
+    where username = #{username,jdbcType=VARCHAR} 
+    and password = #{password,jdbcType=VARCHAR} 
+  </select>
 </mapper>

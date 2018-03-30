@@ -31,6 +31,21 @@
     <script type="text/javascript" src="../Scripts/tban.js"></script>
     
 	<script type="text/javascript" src="../Scripts/lrscroll_1.js"></script>
+<script type="text/javascript" src="../Scripts/jquery-1.11.3.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		var str = "<%=session.getAttribute("errormessage")%>";
+		if(str != null && str != "" && str != "null"){
+			alert(str);
+			<% 
+			session.removeAttribute("errormessage"); 
+			session.removeAttribute("adminlogin");
+			%>
+		}
+		
+	});
+	
+	</script>
     
     
 <title>邛崃市云联惠</title>
@@ -46,7 +61,7 @@
 	<div class="login">
     	<div class="log_img"><img src="../Picture/l_img.png" width="611" height="425" /></div>
 		<div class="log_c">
-        	<form>
+        	<form method="post" action="../etAdminService/adminLogin.do">
             <table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0" cellpadding="0">
               <tr height="50" valign="top">
               	<td width="55">&nbsp;</td>
@@ -56,11 +71,11 @@
               </tr>
               <tr height="70">
                 <td>用户名</td>
-                <td><input id="" type="text" value="" class="l_user" /></td>
+                <td><input  name="username" id="username" type="text" value="" class="l_user" /></td>
               </tr>
               <tr height="70">
                 <td>密&nbsp; &nbsp; 码</td>
-                <td><input type="password" value="" class="l_pwd" /></td>
+                <td><input name="password" type="password" value="" class="l_pwd" /></td>
               </tr>
               <tr>
               	<td>&nbsp;</td>
