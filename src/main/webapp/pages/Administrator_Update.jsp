@@ -22,6 +22,18 @@
 .imgSF{max-width:400px;_width:expression(this.width > 400 ? "400px" : this.width);} 
 </style>
 <script>
+$(document).ready(function(){
+	var str = "<%=session.getAttribute("adminlogin")%>";
+	if(str == null || str == "" || str == "null"){
+		alert("登录超时 即将跳转至登录页面");
+		<% 
+		session.removeAttribute("errormessage"); 
+		session.removeAttribute("adminlogin");
+		%>
+		window.location.href="../pages/Login.jsp";
+	}
+	
+});
 	//获取url中"?"符后的字串 
 	function GetRequest() {
 		var url = location.search;

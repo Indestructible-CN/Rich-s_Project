@@ -22,6 +22,20 @@
 	<script type="text/javascript" src="../Scripts/n_nav.js"></script>
     
 <title>邛崃市云联惠</title>
+<script>
+$(document).ready(function(){
+	var str = "<%=session.getAttribute("adminlogin")%>";
+	if(str == null || str == "" || str == "null"){
+		alert("登录超时 即将跳转至登录页面");
+		<% 
+		session.removeAttribute("errormessage"); 
+		session.removeAttribute("adminlogin");
+		%>
+		window.location.href="../pages/Login.jsp";
+	}
+	
+});
+</script>
 </head>
 <body>  
 <jsp:include page="header.jsp"></jsp:include>

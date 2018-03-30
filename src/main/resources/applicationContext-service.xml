@@ -18,7 +18,5 @@
 	<!-- 商家种类操作 -->
 	<bean id="rtStoreTypeService" class="cn.com.rich.service.impl.RtStoreTypeServiceImpl"/>
 	<!-- 商家种类操作 -->
-	<bean id="shopService" class="cn.com.rich.service.impl.ShopServiceImpl"/>
-	<!-- 商家种类操作 -->
 	<bean id="userService" class="cn.com.rich.service.impl.UserServiceImpl"/>
 </beans>

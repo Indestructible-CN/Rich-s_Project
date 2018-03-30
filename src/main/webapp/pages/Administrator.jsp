@@ -20,6 +20,15 @@
      <script type="text/javascript" src="../Scripts/jquery-1.11.3.min.js"></script>   
     <script>
     window.onload = function() {
+    	var str = "<%=session.getAttribute("adminlogin")%>";
+    	if(str == null || str == "" || str == "null"){
+    		alert("登录超时 即将跳转至登录页面");
+    		<% 
+    		session.removeAttribute("errormessage"); 
+    		session.removeAttribute("adminlogin");
+    		%>
+    		window.location.href="../pages/Login.jsp";
+    	}
     	// 取得类型
     	$.ajax({
 			type : "POST",//方法类型
