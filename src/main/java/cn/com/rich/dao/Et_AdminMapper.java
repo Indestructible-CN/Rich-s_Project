@@ -17,8 +17,8 @@ public interface Et_AdminMapper {
     int insertSelective(Et_Admin record);
 
     List<Et_Admin> selectByExample(Et_AdminExample example);
-
     Et_Admin selectByPrimaryKey(Integer id);
+    Et_Admin login(Et_Admin admin);
 
     int updateByExampleSelective(@Param("record") Et_Admin record, @Param("example") Et_AdminExample example);
 
