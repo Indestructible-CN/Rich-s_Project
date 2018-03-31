@@ -24,8 +24,10 @@
     	if(str == null || str == "" || str == "null"){
     		alert("登录超时 即将跳转至登录页面");
     		<% 
-    		session.removeAttribute("errormessage"); 
-    		session.removeAttribute("adminlogin");
+    		if(session.getAttribute("adminlogin") == null){
+        		session.removeAttribute("errormessage"); 
+        		session.removeAttribute("adminlogin");
+    		}
     		%>
     		window.location.href="../pages/Login.jsp";
     	}
@@ -108,7 +110,7 @@
 	}
 	function seachById(obj){
 		var $id =$(obj).parent().parent().children().first().html();
-		window.location.href="Administrator_Update.jsp?id="+$id;
+		window.location.href="../pages/Administrator_Update.jsp?id="+$id;
 	}
 	function check_page(){
 		var i = $("#nowPage");
@@ -273,13 +275,13 @@
               <table border="0" class="order_tab" style="width:1100px;"  cellspacing="0" cellpadding="0">
               <tr>
                 <td height="" width="15%" style="font-family:'宋体'; padding:5px;">
-                	<button class="btn_u" onclick="window.location.href='Administrator_Insert.jsp'">添加新商户</button>
+                	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Insert.jsp'">添加新商户</button>
                 </td>
                 <td width="15%" style="font-family:'宋体'; padding:5px;">
-                	<button class="btn_u" onclick="window.location.href='Administrator_Insert_Type.jsp'">添加新分类</button>
+                	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Insert_Type.jsp'">添加新分类</button>
                 </td>
                 <td width="70%" style="font-family:'宋体'; padding:5px;">
-                	<button class="btn_u" onclick="window.location.href='Administrator_Notice.jsp'">修改公告</button>
+                	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Notice.jsp'">修改公告</button>
                 </td>
               </tr>
             </table>

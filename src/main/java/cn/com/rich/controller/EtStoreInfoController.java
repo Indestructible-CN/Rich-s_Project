@@ -241,12 +241,30 @@ public class EtStoreInfoController {
 	
 	@ResponseBody
 	@RequestMapping("/deleteByImgSelective")
-	public String deleteByImgSelective(Et_Store_InfoWithBLOBs esiw, Model model, HttpServletRequest request,
+	public String deleteByImgSelective(String img,String index, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
+		System.out.println("img:"+img+"/index:"+index);
 		// 初始化返回值
 		String rtCode = "error";
-		// 更新时间设置为现在
-		esiw.getStoreImg();
+		Et_Store_InfoWithBLOBs esiw = new Et_Store_InfoWithBLOBs();
+		String[] tmp = null;
+		StringBuffer newImg = new StringBuffer();
+		newImg.append("");
+		if(img != null){
+			tmp = img.split(",");
+			if(tmp != null){
+				for(int i = 0;i<tmp.length;i++){
+					if(i == 0 && "0".equals(index)){
+						newImg.append(",");
+					}else if(!(i+"").equals(index)){
+						newImg.append(","+tmp[i]);
+						
+					}
+				}
+			}
+		}
+		
+		esiw.setStoreImg(newImg.toString());
 		int i = etStoreInfoService.updateByPrimaryKeySelective(esiw);
 		if(i == 1){
 			rtCode = "success";

@@ -27,8 +27,10 @@ $(document).ready(function(){
 	if(str == null || str == "" || str == "null"){
 		alert("登录超时 即将跳转至登录页面");
 		<% 
-		session.removeAttribute("errormessage"); 
-		session.removeAttribute("adminlogin");
+		if(session.getAttribute("adminlogin") == null){
+    		session.removeAttribute("errormessage"); 
+    		session.removeAttribute("adminlogin");
+		}
 		%>
 		window.location.href="../pages/Login.jsp";
 	}
@@ -101,12 +103,18 @@ $(document).ready(function(){
 										if(str1 != null && str1 != ""){
 											var strs= new Array();
 											strs=str1.split(",");
+											$("#hiddenImg").val(strs);
 											var size1 = $(strs).size();
 											var sy = 6 - size1;
 											for(var z=0;z<size1;z++){
 												var tmp = "#td"+(z+1);
 												if(z == 0){
-													$(tmp).html("<h1>主图</h1><img class='imgSF'  src='../Picture/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
+													if(strs[z] == "" || strs[z] == null){
+														$(tmp).html("暂无图片");
+													}else{
+														$(tmp).html("<h1>主图</h1><img class='imgSF'  src='../Picture/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
+													}
+													
 												}else{
 													$(tmp).html("<img class='imgSF'  src='../Picture/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
 												}
@@ -238,10 +246,24 @@ $(document).ready(function(){
 		if (confirm(msg) == true) {
 			var $adress = $(obj).next().val();
 			alert($adress);
-			/*$.post("DeleteStudentsById?stuId="+$id,null,function(data){
-			alert(data);
-			window.location.href="SelectAllStudents?page="+${stupage};
-			});*/
+			var $hiddenImg = $("#hiddenImg").val();
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"img" : $hiddenImg
+					,"index" : $adress
+				},
+				async : false,
+				url : "../etStoreInfoService/deleteByImgSelective.do",//url
+				success : function(result) {
+					alert("删除成功！");
+					window.location.reload();
+				},
+				error : function(result) {
+					alert("删除失败！");
+				}
+			});
 			return true;
 		} else {
 			return false;
@@ -362,7 +384,7 @@ $(document).ready(function(){
 
 		</div>
 	</div>
-
+<input type="hidden" id="hiddenImg" value=""/>
 </body>
 
 

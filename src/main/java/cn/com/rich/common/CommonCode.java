@@ -37,12 +37,7 @@ public final class CommonCode {
 	}
 	public static void main(String[] args) {
 		CommonCode c = new CommonCode();
-//		System.out.println(c.deleteImg("/Picture/1234.png"));
-		
-		  
-        String path = CommonCode.class.getResource("/").getPath();
-        System.out.println(path);
-        path = CommonCode.class.getResource("").getPath();  
-        System.out.println(path); 
+
+		System.out.println(c.deleteImg("/Picture/1234.png"));
 	}
 }
