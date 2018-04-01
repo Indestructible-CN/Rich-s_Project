@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="multipart/form-data; charset=utf-8" />
 <link type="text/css" rel="stylesheet" href="../css/style.css" />
 <!--[if IE 6]>
     <script src="Scripts/iepng.js" type="text/javascript"></script>
@@ -103,6 +103,7 @@ $(document).ready(function(){
 										if(str1 != null && str1 != ""){
 											var strs= new Array();
 											strs=str1.split(",");
+											// 图片字符串
 											$("#hiddenImg").val(strs);
 											var size1 = $(strs).size();
 											var sy = 6 - size1;
@@ -110,13 +111,13 @@ $(document).ready(function(){
 												var tmp = "#td"+(z+1);
 												if(z == 0){
 													if(strs[z] == "" || strs[z] == null){
-														$(tmp).html("暂无图片");
+														$(tmp).html("<h1>主图</h1>暂无图片");
 													}else{
-														$(tmp).html("<h1>主图</h1><img class='imgSF'  src='../Picture/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
+														$(tmp).html("<h1>主图</h1><img class='imgSF'  src='../shopImg/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
 													}
 													
 												}else{
-													$(tmp).html("<img class='imgSF'  src='../Picture/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
+													$(tmp).html("<img class='imgSF'  src='../shopImg/"+strs[z]+"' alt='' /><br /><br /><button onclick='delete_cfm(this);'>删除</button><input type='hidden' value='"+z+"' />");
 												}
 											}
 											for(size1;size1<6;size1++){
@@ -245,19 +246,19 @@ $(document).ready(function(){
 		var msg = "确认删除吗？";
 		if (confirm(msg) == true) {
 			var $adress = $(obj).next().val();
-			alert($adress);
 			var $hiddenImg = $("#hiddenImg").val();
+			var $id = $("#id").html();
 			$.ajax({
 				type : "POST",//方法类型
 				dataType : "TEXT",//预期服务器返回的数据类型
 				data : {
 					"img" : $hiddenImg
 					,"index" : $adress
+					,"id" : $id
 				},
 				async : false,
 				url : "../etStoreInfoService/deleteByImgSelective.do",//url
 				success : function(result) {
-					alert("删除成功！");
 					window.location.reload();
 				},
 				error : function(result) {
@@ -280,6 +281,68 @@ $(document).ready(function(){
 		} else {
 			return false;
 		}
+	}
+	function uploadImg(){
+		// 选择替换主图还是副图
+		$index = $("input[name='selectImg']:checked").val();
+		// 图片input
+		$file_input = $("#file_input").val();
+		$point = $file_input.lastIndexOf(".");  
+		// 后缀名
+		$type = $file_input.substr($point); 
+		// 图片字符串
+		$hiddenImg = $("#hiddenImg").val().split(",");
+		// id
+		$id = $("#id").html();
+		
+		if($file_input == "" | $file_input == null){
+			alert("请选择上传的图片");
+		}else if($type != ".jpg" && $type!=".png" && $type!=".JPG" && $type!=".PNG"){
+			alert("请选择图片类型");
+		}else if($index != "1" && $hiddenImg.length > 6){
+			alert("图片已达上限 请删除之后再增加");
+		// 上传的图片过大
+		}else if(false){
+			
+		}else{ 
+			var form = new FormData(document.getElementById("imgForm"));  
+		    var url = "../etStoreInfoService/uploadImg.do";
+		    $.ajax({  
+		        url : url,  
+		        data : form,  
+		        dataType : "TEXT",
+		        type : 'post',  
+		        processData:false,  
+		        contentType:false,  
+		        success : function(data){
+		        	uploadImgSub($index,$id,$file_input);
+		        },  
+		        error : function(data){
+		        	alert("上传失败"); 
+		        }  
+		    });
+		}
+	}
+	
+	function uploadImgSub(index,id,file_input){
+		$fileName = file_input.substr(file_input.lastIndexOf("\\")+1);
+		$.ajax({  
+	        url : "../etStoreInfoService/uploadImgSub.do",
+	        data : {
+	        	"index" : index,
+	        	"id" : id,
+	        	"fileName" : $fileName
+	        },  
+	        dataType : "TEXT",
+	        type : 'post',  
+	        success : function(data){
+	            alert("上传成功");
+	            window.location.reload();
+	        },  
+	        error : function(data){
+	        	alert("数据上传失败"); 
+	        }  
+	    });
 	}
 </script>
 <title>邛崃市云联惠</title>
@@ -308,6 +371,9 @@ $(document).ready(function(){
 
 				<table id="tab1" border="0" class="order_tab"
 					style="width: 1100px; text-align: center;" cellpadding="0">
+					<tr>
+						<td width="30%" height="30" colspan="2" style="font-size: 16px;">如需要设置此商家为“优质商家”，请记下商户ID并回到管理主页，进入“优质商家管理”一并添加</td>
+					</tr>
 					<tr>
 						<td width="30%" height="30">商户ID</td>
 						<td width="70%" align="left"><span id="id"></span></td>
@@ -353,7 +419,7 @@ $(document).ready(function(){
 				</div>
 				<div class="mem_tit1">商户图片</div>
 				<table id="tab1" border="0" class="order_tab"
-					style="width: 1100px; text-align: center; margin-bottom: 50px;"
+					style="width: 1100px; text-align: center; margin-bottom: 50px,50px,0px,50px;"
 					cellspacing="0" cellpadding="0">
 					<tr>
 						<td width="400px" height="300px" id="td1"></td>
@@ -368,18 +434,16 @@ $(document).ready(function(){
 						<td width="400px" height="300px" id="td6"></td>
 					</tr>
 					<tr>
-						<td width="50%" height="auto" colspan="2">
-							<form id="imgForm" action="" enctype="multipart/form-data">
-								<input type="file" id="file_input" onchange="loadImg(this);"
-									style="border: 1px solid; height: 22px; width: 400px; margin-bottom: 10px;" />
-								<input type="hidden" value="" /><br />
-								<button>上传图片</button>
+						<td width="" height="10" colspan="2">
+							<form id="imgForm" enctype="multipart/form-data">
+								<input type="file" id="file_input" name="file"
+									style="border: 1px solid; height: 23px; width: 400px; margin-bottom: 10px;" />
 							</form>
 						</td>
 					</tr>
 				</table>
-
-
+				<p align="center"><input name="selectImg" type="radio" value="1" />替换主图<span>&nbsp;&nbsp;&nbsp;</span><input checked="checked" name="selectImg" type="radio" value="2" />增加副图
+				<br /><button onclick="uploadImg()">上传图片</button></p>
 			</div>
 
 		</div>

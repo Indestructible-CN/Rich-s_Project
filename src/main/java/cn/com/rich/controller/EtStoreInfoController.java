@@ -1,5 +1,7 @@
 package cn.com.rich.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.rich.common.CommonCode;
 import cn.com.rich.common.CommonSeachKeyEsi;
@@ -162,7 +165,7 @@ public class EtStoreInfoController {
 			pages = 0;
 		}
 		// 整除的情况
-		if(selectCount % Integer.parseInt(CommonCode.SelectLimitCode.ADMIN_SELECT_LIMIT_20) == 0){
+		if (selectCount % Integer.parseInt(CommonCode.SelectLimitCode.ADMIN_SELECT_LIMIT_20) == 0) {
 			pages = selectCount / Integer.parseInt(CommonCode.SelectLimitCode.ADMIN_SELECT_LIMIT_20);
 		}
 		// 清空无用Map类型开始
@@ -193,13 +196,13 @@ public class EtStoreInfoController {
 		esiw.setIsDelete(CommonCode.DELETE_FLAG_Y);
 		// 赋值更改时间
 		esiw.setGmtModify(new Date());
-		if(etStoreInfoService.updateByPrimaryKeySelective(esiw) == 1){
+		if (etStoreInfoService.updateByPrimaryKeySelective(esiw) == 1) {
 			return "success";
-		}else{
+		} else {
 			return "error";
 		}
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/selectByPrimaryKey")
 	public String selectByPrimaryKey(Et_Store_InfoWithBLOBs esiw, Model model, HttpServletRequest request,
@@ -211,19 +214,19 @@ public class EtStoreInfoController {
 		// 调用查询
 		es = etStoreInfoService.selectByPrimaryKey(esiw.getId());
 		// 转json用Map
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("Object", es);
-		
-		if(es != null){
+
+		if (es != null) {
 			map.put("Msg", "查找成功");
-		}else{
+		} else {
 			map.put("Msg", "查无此人");
 		}
 		JSONArray json = JSONArray.fromObject(map);
 		rtCode = json.toString();
 		return rtCode;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(Et_Store_InfoWithBLOBs esiw, Model model, HttpServletRequest request,
@@ -233,43 +236,150 @@ public class EtStoreInfoController {
 		// 更新时间设置为现在
 		esiw.setGmtModify(new Date());
 		int i = etStoreInfoService.updateByPrimaryKeySelective(esiw);
-		if(i == 1){
+		if (i == 1) {
 			rtCode = "success";
 		}
 		return rtCode;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/deleteByImgSelective")
-	public String deleteByImgSelective(String img,String index, Model model, HttpServletRequest request,
+	public String deleteByImgSelective(String img, String index, String id, Model model, HttpServletRequest request,
 			HttpServletResponse response) {
-		System.out.println("img:"+img+"/index:"+index);
 		// 初始化返回值
 		String rtCode = "error";
 		Et_Store_InfoWithBLOBs esiw = new Et_Store_InfoWithBLOBs();
 		String[] tmp = null;
 		StringBuffer newImg = new StringBuffer();
 		newImg.append("");
-		if(img != null){
+		String deleteImg = null;
+		if (img != null) {
 			tmp = img.split(",");
-			if(tmp != null){
-				for(int i = 0;i<tmp.length;i++){
-					if(i == 0 && "0".equals(index)){
-						newImg.append(",");
-					}else if(!(i+"").equals(index)){
-						newImg.append(","+tmp[i]);
-						
+			if (tmp != null) {
+				for (int i = 0; i < tmp.length; i++) {
+					if (!(i + "").equals(index)) {
+						if (i == 0 && "0".equals(index)) {
+							newImg.append(",");
+						} else {
+							if (i == 0) {
+								newImg.append(tmp[i]);
+							} else {
+								newImg.append("," + tmp[i]);
+							}
+						}
+					} else {
+						deleteImg = tmp[i];
 					}
 				}
 			}
 		}
-		
+		esiw.setId(id);
 		esiw.setStoreImg(newImg.toString());
-		int i = etStoreInfoService.updateByPrimaryKeySelective(esiw);
-		if(i == 1){
+		int i = 0;
+		i += etStoreInfoService.updateByPrimaryKeySelective(esiw);
+		CommonCode com = new CommonCode();
+		// "../../" 就是根目录了
+		System.out.println(
+				"删除项目中文件" + com.deleteImg(this.getClass().getResource("/").getPath() + "../../shopImg/" + deleteImg));
+		System.out.println(
+				"删除备份文件" + com.deleteImg(this.getClass().getResource("/").getPath() + "../../../shopImg/" + deleteImg));
+
+		if (i == 1) {
 			rtCode = "success";
 		}
 		return rtCode;
 	}
+	/**
+	 * @param file 图片
+	 * @param index 图片类型 [1：主图，2：副图]
+	 * @param id ID
+	 */
+	@ResponseBody
+	@RequestMapping("/uploadImg")
+	public String uploadImg(MultipartFile file, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String rtCode = "error";
+		// 图片目录
+		String path = request.getSession().getServletContext().getRealPath("/shopImg");
+		// 图片备份目录
+		String pathBk = request.getSession().getServletContext().getRealPath("/")+"../shopImg";
+		String fileName = file.getOriginalFilename();
+		File dir = new File(path, fileName);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		try {
+			file.transferTo(dir);
+			File fromFile = new File(path+"/"+fileName);
+			File toFile = new File(pathBk+"/"+fileName);
+			// 备份图片
+			CommonCode.copyFile(fromFile, toFile);
+			
+			rtCode = "success";
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+		return rtCode;
+	}
+	@ResponseBody
+	@RequestMapping("/uploadImgSub")
+	public String uploadImgSub(String index, String id, String fileName, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String rtCode = "error";
+		System.out.println("Index:"+index+"------Id:"+id+"------fileName"+fileName);
+		Et_Store_InfoWithBLOBs esi = etStoreInfoService.selectByPrimaryKey(id);
+		StringBuffer newImg = new StringBuffer();
+		newImg.append("");
+		if(esi == null){
+			System.out.println("此数据已被删除");
+		}else{
+			// 图片字符串
+			String img = esi.getStoreImg();
+			// 图片字符串为空的时候
+			if(img == null || "".equals(img)){
+				// 上传的是主图
+				if("1".equals(index)){
+					newImg.append(fileName);
+				// 上传的是副图
+				}else{
+					newImg.append(","+fileName);
+				}
+			// 图片字符串不为空的时候
+			}else{
+				String[] strLi = img.split(",");
+				if(strLi != null & strLi.length >= 2){
+					if("1".equals(index)){
+						for(int z = 0;z<strLi.length;z++){
+							if(z == 0){
+								newImg.append(fileName);
+							}else{
+								newImg.append(","+strLi[z]);
+							}
+						}
+					}else{
+						newImg.append(img+","+fileName);
+					}
+				}else{
+					if("1".equals(index)){
+						newImg.append(fileName);
+					}else{
+						newImg.append(img+","+fileName);
+					}
+				}
+			}
+			
+			Et_Store_InfoWithBLOBs newEsi = new Et_Store_InfoWithBLOBs();
+			if(!"".equals(newImg.toString())){
+				newEsi.setStoreImg(newImg.toString());
+			}else{
+				newEsi.setStoreImg(null);
+			}
+			newEsi.setId(id);
+			int i = etStoreInfoService.updateByPrimaryKeySelective(newEsi);
+			if(i == 1){
+				rtCode = "success";
+			}
+		}
+		return rtCode;
+	}
+	
 	
 }

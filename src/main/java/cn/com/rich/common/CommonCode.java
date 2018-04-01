@@ -1,6 +1,9 @@
 package cn.com.rich.common;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public final class CommonCode {
 
@@ -35,9 +38,23 @@ public final class CommonCode {
 
 		return rtCode;
 	}
-	public static void main(String[] args) {
-		CommonCode c = new CommonCode();
-
-		System.out.println(c.deleteImg("/Picture/1234.png"));
-	}
+	/**
+	 * 
+	 * 
+	 * @param fromFile
+	 * @param toFile
+	 * @throws IOException
+	 */
+	public static void copyFile(File fromFile,File toFile) throws IOException{
+        FileInputStream ins = new FileInputStream(fromFile);
+        FileOutputStream out = new FileOutputStream(toFile);
+        byte[] b = new byte[3072];
+        int n=0;
+        while((n=ins.read(b))!=-1){
+            out.write(b, 0, n);
+        }
+        
+        ins.close();
+        out.close();
+    }
 }
