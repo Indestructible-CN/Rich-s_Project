@@ -278,9 +278,12 @@
                 	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Insert.jsp'">添加新商户</button>
                 </td>
                 <td width="15%" style="font-family:'宋体'; padding:5px;">
+                	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Top_Store.jsp'">添加顶置商家</button>
+                </td>
+                <td width="15%" style="font-family:'宋体'; padding:5px;">
                 	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Insert_Type.jsp'">添加新分类</button>
                 </td>
-                <td width="70%" style="font-family:'宋体'; padding:5px;">
+                <td width="55%" style="font-family:'宋体'; padding:5px;">
                 	<button class="btn_u" onclick="window.location.href='../pages/Administrator_Notice.jsp'">修改公告</button>
                 </td>
               </tr>

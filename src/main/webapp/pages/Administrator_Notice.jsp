@@ -27,26 +27,47 @@
 			%>
 			window.location.href="../pages/Login.jsp";
 		}
-		
+		$.ajax({
+			type : "POST",//方法类型
+			dataType : "JSON",//预期服务器返回的数据类型
+			url : "../commonController/selectNotice.do",//url
+			success : function(result) {
+				$.each(result, function(i, dom) {
+					if(i == 0){
+						$("#storeDescribe1").val(dom);
+					}
+					if(i == 1){
+						$("#storeDescribe2").val(dom);
+					}
+				});
+			},
+			error : function(result) {
+				alert("获取公告失败！");
+			}
+		});
 	});
 	function insert_cfm() {
 		var msg = "确认保存吗？";
-		if (confirm(msg) == true) {
-			/* 
-					$.ajax({
-						type : "POST",//方法类型
-						dataType : "TEXT",//预期服务器返回的数据类型
-						url : "../etStoreInfoService/doInsert.do",//url
-						data : $('#Form_Insert').serialize(),
-						success : function(result) {
-							alert("新增成功！");
-						},
-						error : function(result) {
-							alert("新增失败！");
-						}
-					}); */
-					alert("OK!");
-					return true;
+		$notice1 = $("#storeDescribe1").val();
+		$notice2 = $("#storeDescribe2").val();
+		if (confirm(msg) == true) { 
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"notice1" : $notice1,
+					"notice2" : $notice2
+				},
+				url : "../commonController/updateNotice.do",//url
+				success : function(result) {
+					alert("已保存！");
+					window.location.reload();
+				},
+				error : function(result) {
+					alert("保存公告失败！");
+				}
+			});
+			return true;
 				
 		} else {
 			return false;
@@ -84,15 +105,15 @@
 						<tr>
 							<td width="10%" height="30">固定公告</td>
 							<td width="90%" align="left"><textarea rows="5px" style="resize:none" maxlength="100"
-									placeholder="请填写固定公告 （如不需要清空保存即可）" cols="100%" id="storeDescribe"
-									name="storeDescribe">模拟公告1</textarea>
+									placeholder="请填写固定公告 （如不需要清空保存即可）" cols="100%" id="storeDescribe1"
+									name="storeDescribe"></textarea>
 							<font color="red">可输入100字 此公告固定不动</font>
 							</td>
 						</tr>
 						<tr>
 							<td width="10%" height="30">滚动公告</td>
 							<td width="90%" align="left"><textarea rows="5px" style="resize:none" maxlength="150"
-									placeholder="请填写滚动公告 （如不需要清空保存即可）" cols="100%" id="storeDescribe"
+									placeholder="请填写滚动公告 （如不需要清空保存即可）" cols="100%" id="storeDescribe2"
 									name="storeDescribe"></textarea>
 							<font  color="red">可输入150字 此公告来回滚动</font>
 							</td>

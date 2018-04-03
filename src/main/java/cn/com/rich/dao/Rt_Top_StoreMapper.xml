@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.com.rich.dao.Rt_Top_StoreMapper" >
+  <resultMap id="BaseResultMap" type="cn.com.rich.entity.Rt_Top_Store" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="store_id" property="storeId" jdbcType="VARCHAR" />
+    <result column="top_tag" property="topTag" jdbcType="VARCHAR" />
+    <result column="top_weight" property="topWeight" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, store_id, top_tag, top_weight, is_delete, gmt_modify, gmt_create
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.com.rich.entity.Rt_Top_StoreExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from rt_top_store where is_delete = "n"
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    order by CAST(id as SIGNED INTEGER)
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from rt_top_store
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from rt_top_store
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.com.rich.entity.Rt_Top_StoreExample" >
+    delete from rt_top_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.com.rich.entity.Rt_Top_Store" >
+    insert into rt_top_store (id, store_id, top_tag, 
+      top_weight, is_delete, gmt_modify, 
+      gmt_create)
+    values (#{id,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}, #{topTag,jdbcType=VARCHAR}, 
+      #{topWeight,jdbcType=INTEGER}, #{isDelete,jdbcType=CHAR}, #{gmtModify,jdbcType=TIMESTAMP}, 
+      #{gmtCreate,jdbcType=TIMESTAMP})
+  </insert>
+  <!-- 20180402 start -->
+  <insert id="insertSelectiveSub" parameterType="cn.com.rich.entity.Rt_Top_Store" >
+    insert into rt_top_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id == null" >
+        id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="topTag != null" >
+        top_tag,
+      </if>
+      <if test="topWeight != null" >
+        top_weight,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id == null" >
+        (SELECT e.maid FROM (select case WHEN Max(CONVERT(ID,SIGNED)) is null THEN 1 else Max(CONVERT(ID,SIGNED))+1 end as maid from rt_top_store) e ), 
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="topTag != null" >
+        #{topTag,jdbcType=VARCHAR},
+      </if>
+      <if test="topWeight != null" >
+        #{topWeight,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <!-- 20180402 end -->
+  <insert id="insertSelective" parameterType="cn.com.rich.entity.Rt_Top_Store" >
+    insert into rt_top_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="storeId != null" >
+        store_id,
+      </if>
+      <if test="topTag != null" >
+        top_tag,
+      </if>
+      <if test="topWeight != null" >
+        top_weight,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="storeId != null" >
+        #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="topTag != null" >
+        #{topTag,jdbcType=VARCHAR},
+      </if>
+      <if test="topWeight != null" >
+        #{topWeight,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.com.rich.entity.Rt_Top_StoreExample" resultType="java.lang.Integer" >
+    select count(*) from rt_top_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update rt_top_store
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeId != null" >
+        store_id = #{record.storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topTag != null" >
+        top_tag = #{record.topTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.topWeight != null" >
+        top_weight = #{record.topWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=CHAR},
+      </if>
+      <if test="record.gmtModify != null" >
+        gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.gmtCreate != null" >
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update rt_top_store
+    set id = #{record.id,jdbcType=VARCHAR},
+      store_id = #{record.storeId,jdbcType=VARCHAR},
+      top_tag = #{record.topTag,jdbcType=VARCHAR},
+      top_weight = #{record.topWeight,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=CHAR},
+      gmt_modify = #{record.gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.com.rich.entity.Rt_Top_Store" >
+    update rt_top_store
+    <set >
+      <if test="storeId != null" >
+        store_id = #{storeId,jdbcType=VARCHAR},
+      </if>
+      <if test="topTag != null" >
+        top_tag = #{topTag,jdbcType=VARCHAR},
+      </if>
+      <if test="topWeight != null" >
+        top_weight = #{topWeight,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.com.rich.entity.Rt_Top_Store" >
+    update rt_top_store
+    set store_id = #{storeId,jdbcType=VARCHAR},
+      top_tag = #{topTag,jdbcType=VARCHAR},
+      top_weight = #{topWeight,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=CHAR},
+      gmt_modify = #{gmtModify,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

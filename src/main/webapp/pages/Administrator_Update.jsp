@@ -372,7 +372,7 @@ $(document).ready(function(){
 				<table id="tab1" border="0" class="order_tab"
 					style="width: 1100px; text-align: center;" cellpadding="0">
 					<tr>
-						<td width="30%" height="30" colspan="2" style="font-size: 16px;">如需要设置此商家为“优质商家”，请记下商户ID并回到管理主页，进入“优质商家管理”一并添加</td>
+						<td width="30%" height="30" colspan="2" style="font-size: 16px;">如需要设置此商户为“优质商户”，请记下商户ID并回到管理主页，进入“添加顶置商户”一并添加</td>
 					</tr>
 					<tr>
 						<td width="30%" height="30">商户ID</td>
