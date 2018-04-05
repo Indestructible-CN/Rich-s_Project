@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.com.rich.common.CommonCode;
 import cn.com.rich.entity.Rt_Top_Store;
 import cn.com.rich.service.RtTopStoreService;
 import net.sf.json.JSONArray;
@@ -80,7 +81,7 @@ public class RtTopStoreController {
 			HttpServletResponse response) throws Exception {
 		String rtCode = "error";
 		rts.setGmtModify(new Date());
-		rts.setIsDelete("y");
+		rts.setIsDelete(CommonCode.DELETE_FLAG_Y);
 		int i = rtTopStoreService.updateByPrimaryKeySelective(rts);
 		if(i == 1){
 			rtCode = "success";

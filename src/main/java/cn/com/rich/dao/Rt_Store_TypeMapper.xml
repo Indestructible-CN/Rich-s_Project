@@ -76,7 +76,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from rt_store_type
+    from rt_store_type where is_delete = "n"
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -133,6 +133,49 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="typeName != null" >
+        #{typeName,jdbcType=VARCHAR},
+      </if>
+      <if test="typeDescribe != null" >
+        #{typeDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=CHAR},
+      </if>
+      <if test="gmtModify != null" >
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null" >
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <insert id="insertSelectiveSub" parameterType="cn.com.rich.entity.Rt_Store_Type" >
+    insert into rt_store_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id == null" >
+        id,
+      </if>
+      <if test="typeName != null" >
+        type_name,
+      </if>
+      <if test="typeDescribe != null" >
+        type_describe,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+      <if test="gmtModify != null" >
+        gmt_modify,
+      </if>
+      <if test="gmtCreate != null" >
+        gmt_create,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id == null" >
+        (SELECT e.maid FROM (select case WHEN Max(CONVERT(ID,SIGNED)) is null THEN 1 else Max(CONVERT(ID,SIGNED))+1 end as maid from rt_store_type) e ), 
       </if>
       <if test="typeName != null" >
         #{typeName,jdbcType=VARCHAR},

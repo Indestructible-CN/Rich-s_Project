@@ -17,4 +17,14 @@ public class RtStoreTypeServiceImpl implements RtStoreTypeService {
 		return rstm.selectByExample(null);
 	}
 
+	@Override
+	public int insertSelectiveSub(Rt_Store_Type record) {
+		return rstm.insertSelectiveSub(record);
+	}
+
+	@Override
+	public int updateByPrimaryKeySelective(Rt_Store_Type record) {
+		return rstm.updateByPrimaryKeySelective(record);
+	}
+
 }

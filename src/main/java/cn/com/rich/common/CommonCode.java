@@ -11,7 +11,7 @@ public final class CommonCode {
 		/**
 		 * 每页分多少条 当前20
 		 */
-		public static final String ADMIN_SELECT_LIMIT_20 = "2";
+		public static final String ADMIN_SELECT_LIMIT_20 = "20";
 	}
 
 	public static final String DELETE_FLAG_Y = "y";

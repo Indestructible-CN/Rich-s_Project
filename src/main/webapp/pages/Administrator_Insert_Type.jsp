@@ -27,26 +27,67 @@
 			%>
 			window.location.href="../pages/Login.jsp";
 		}
-		
+		$.ajax({
+			type : "POST",//方法类型
+			dataType : "JSON",//预期服务器返回的数据类型
+			url : "../rtStoreTypeService/doInsertInit.do",//url
+			success : function(result) {
+				$.each(result, function(i, dom) {
+					if($(dom).size() == 0){
+						$('#tab_tbody').append("<tr><td colspan='6' align='center'>暂无数据</td></tr>");
+					}else{
+						if(dom.gmtCreate !=  null){
+							var javaDate=dom.gmtCreate;
+							var jsDate=new Date(javaDate.time);
+							var gmtCreateStr=jsDate.format("yyyy-MM-dd hh:mm:ss");
+						}else{
+							var gmtCreateStr= "";
+						}
+						if(dom.gmtModify != null){
+							var javaDate1=dom.gmtModify;
+							var jsDate1=new Date(javaDate1.time);
+							var gmtModifyStr=jsDate1.format("yyyy-MM-dd hh:mm:ss");
+						}else{
+							var gmtModifyStr = "";
+						}
+						$('#tab_tbody').append("<tr>"+
+								"<td width='7%' height='30'>"+dom.id+"</td>"+
+								"<td width='18%' height='30'><input type='text' placeholder='请填写类型名称 (15字以内)'  maxlength='15' style='width: 220px;' value='"+dom.typeName+"' /></td>"+
+								"<td width='25%' height='30'><input type='text' placeholder='请填写类型描述 (20字以内)'  maxlength='20' style='width: 220px;' value='"+dom.typeDescribe+"' /></td>"+
+								"<td width='18%' height='30'>"+gmtCreateStr+"</td>"+
+								"<td width='18%' height='30'>"+gmtModifyStr+"</td>"+
+								"<td width='14%' height='30'><button onclick='update_cfm(this)' >修&nbsp;改</button>&nbsp;"+
+                				"<button onclick='delete_cfm(this);'>删&nbsp;除</button></td>"+
+								"</tr>");
+					}
+				});
+			},
+			error : function(result) {
+				alert("查询失败！");
+			}
+		});
 	});
 	function insert_cfm() {
+		$typeName = $("#typeName").val();
+		$typeDescribe = $("#typeDescribe").val();
 		var msg = "确认增加吗？";
 		if (confirm(msg) == true) {
-			/* 
-					$.ajax({
-						type : "POST",//方法类型
-						dataType : "TEXT",//预期服务器返回的数据类型
-						url : "../etStoreInfoService/doInsert.do",//url
-						data : $('#Form_Insert').serialize(),
-						success : function(result) {
-							alert("新增成功！");
-						},
-						error : function(result) {
-							alert("新增失败！");
-						}
-					}); */
-					alert("OK!");
-					return true;
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"typeName" : $typeName,
+					"typeDescribe" : $typeDescribe
+				},
+				url : "../rtStoreTypeService/insertSelectiveSub.do",//url
+				success : function(result) {
+					window.location.reload();
+				},
+				error : function(result) {
+					alert("新增失败！");
+				}
+			});
+			return true;
 				
 		} else {
 			return false;
@@ -54,20 +95,86 @@
 	
 	}
 	function delete_cfm(d){
+		$id = $(d).parent().parent().children().first().html();
 		var msg = "确认删除吗？";
-		if(confirm(msg)==true){/*
-		var $id =$(d).parent().parent().children().first().html();
-		$.post("DeleteStudentsById?stuId="+$id,null,function(data){
-        alert(data);
-        window.location.href="SelectAllStudents?page="+${stupage};
-    	});*/
-    	alert("OK!!!");
+		if(confirm(msg)==true){
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"id" : $id
+				},
+				url : "../rtStoreTypeService/deleteByPrimaryKeySelective.do",//url
+				success : function(result) {
+					window.location.reload();
+				},
+				error : function(result) {
+					alert("删除失败！");
+				}
+			});
 			return true;
 		}else{
 			return false;
 		}
 	}
-	
+	function update_cfm(d){
+		$id = $(d).parent().parent().children().first().html();
+		$typeName = $(d).parent().parent().children().first().next().children().first().val();
+		$typeDescribe = $(d).parent().parent().children().first().next().next().children().first().val();
+		var msg = "确认修改吗？";
+		if(confirm(msg)==true){
+			$.ajax({
+				type : "POST",//方法类型
+				dataType : "TEXT",//预期服务器返回的数据类型
+				data : {
+					"id" : $id,
+					"typeName" : $typeName,
+					"typeDescribe" : $typeDescribe
+				},
+				url : "../rtStoreTypeService/updateByPrimaryKeySelective.do",//url
+				success : function(result) {
+					window.location.reload();
+				},
+				error : function(result) {
+					alert("修改失败！");
+				}
+			});
+			return true;
+		}else{
+			return false;
+		}
+	}
+	/** 
+	 * 时间对象的格式化; 
+	 */  
+	Date.prototype.format = function (format)   
+	{  
+	    /* 
+	     * eg:format="YYYY-MM-dd hh:mm:ss"; 
+	     */  
+	    var o =   
+	    {  
+	        "M+" : this.getMonth() + 1, // month  
+	        "d+" : this.getDate(), // day  
+	        "h+" : this.getHours(), // hour  
+	        "m+" : this.getMinutes(), // minute  
+	        "s+" : this.getSeconds(), // second  
+	        "q+" : Math.floor((this.getMonth() + 3)  / 3), 
+	        "S" : this.getMilliseconds() // millisecond  
+	    }  
+	    if (/(y+)/.test(format))   
+	    {  
+	        format = format.replace(RegExp.$1, (this.getFullYear() + "") .substr(4 - RegExp.$1.length));  
+	    }  
+	    for ( var k in o)   
+	    {  
+	        if (new RegExp("(" + k + ")").test(format))   
+	        {  
+	            format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));  
+	        }  
+	    }  
+	    return format;  
+	}
 </script>
 <title>邛崃市云联惠</title>
 </head>
@@ -98,12 +205,12 @@
 						style="width: 1100px; text-align: center; cellspacing: 0; cellpadding: 0;">
 						<tr>
 							<td width="30%" height="30">类型名称</td>
-							<td width="70%" align="left"><input type="text"
+							<td width="70%" align="left"><input type="text" id="typeName"
 								placeholder="请填写类型名称 (15字以内)"  maxlength="15" value="" /></td>
 						</tr>
 						<tr>
 							<td width="30%" height="30">类型描述</td>
-							<td width="70%" align="left"><input type="text"
+							<td width="70%" align="left"><input type="text" id="typeDescribe"
 								placeholder="请填写类型描述(20字以内)"  maxlength="20" value="" /></td>
 						</tr>
 					</table>
@@ -125,28 +232,8 @@
 							<td width="18%" height="30">修改时间</td>
 							<td width="14%" height="30">操作</td>
 						</tr>
-						<tr>
-							<td height="30">1</td>
-							<td height="30">餐饮</td>
-							<td height="30">餐饮相关</td>
-							<td height="30">2018-03-02 12:12:45</td>
-							<td height="30">2018-03-02 14:12:45</td>
-							<td height="30">
-								<button onclick="window.location.href='Administrator_Update_Type.jsp'" >修&nbsp;改</button>&nbsp;
-                				<button onclick="delete_cfm(this);">删&nbsp;除</button>
-							</td>
-						</tr>
-						<tr>
-							<td height="30">2</td>
-							<td height="30">类型名称</td>
-							<td height="30">类型描述</td>
-							<td height="30">2018-03-02 12:19:45</td>
-							<td height="30"></td>
-							<td height="30">
-								<button>修&nbsp;改</button>&nbsp;
-                				<button>删&nbsp;除</button>
-							</td>
-						</tr>
+						<tbody id="tab_tbody">
+						</tbody>
 					</table>
 			</div>
 

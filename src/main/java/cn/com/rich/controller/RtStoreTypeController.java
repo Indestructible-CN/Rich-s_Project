@@ -1,5 +1,6 @@
 package cn.com.rich.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.com.rich.common.CommonCode;
 import cn.com.rich.entity.Rt_Store_Type;
 import cn.com.rich.service.RtStoreTypeService;
 import net.sf.json.JSONArray;
@@ -40,6 +42,44 @@ public class RtStoreTypeController {
 		}else{
 			JSONArray json = JSONArray.fromObject(rstLi);
 			rtCode = json.toString();
+		}
+		return rtCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/insertSelectiveSub")
+	public String insertSelectiveSub(Rt_Store_Type rst, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		String rtCode = "error";
+		rst.setGmtCreate(new Date());
+		rst.setId(null);
+		if(rtStoreTypeService.insertSelectiveSub(rst) == 1){
+			rtCode = "success";
+		}
+		return rtCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/updateByPrimaryKeySelective")
+	public String updateByPrimaryKeySelective(Rt_Store_Type rst, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		String rtCode = "error";
+		rst.setGmtModify(new Date());
+		if(rtStoreTypeService.updateByPrimaryKeySelective(rst) == 1){
+			rtCode = "success";
+		}
+		return rtCode;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/deleteByPrimaryKeySelective")
+	public String deleteByPrimaryKeySelective(Rt_Store_Type rst, Model model, HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		String rtCode = "error";
+		rst.setGmtModify(new Date());
+		rst.setIsDelete(CommonCode.DELETE_FLAG_Y);
+		if(rtStoreTypeService.updateByPrimaryKeySelective(rst) == 1){
+			rtCode = "success";
 		}
 		return rtCode;
 	}

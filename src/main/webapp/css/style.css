@@ -1864,7 +1864,7 @@ ul.p_sell li .times{
 	width:100%; height:140px; background-color:#ff4e00;
 }
 .m_logo{
-	width:150px; height:58px; overflow:hidden; float:left; margin-top:38px;
+	width:150px; height:65px; overflow:visible; float:left; margin-top:35px;
 }
 .m_search{
 	width:392px; height:40px; overflow:hidden; background-color:#FFF; float:left; display:inline; margin-left:450px; margin-top:49px;
@@ -2226,91 +2226,6 @@ table.co_tab tr td{
 
 
 
-
-
-/*---------------购物车---------------*/
-table.car_tab{
-	border-collapse:collapse; border:1px solid #eaeaea; font-family:"宋体";
-}
-table.car_tab tr td{
-	border-collapse:collapse; line-height:22px; border:0; border-bottom:1px solid #eaeaea; padding:15px 20px;
-}
-table.car_tab tr td.car_th{
-	background-color:#f6f6f6; font-size:14px; border-right:1px solid #eaeaea; padding:8px 20px; font-family:"Microsoft YaHei"; text-align:center;
-}
-.car_tr{
-	background-color:#f6f6f6;
-}
-.c_s_img{
-	width:73px; height:73px; overflow:hidden; float:left; display:inline; margin-right:10px; border:1px solid #eaeaea;
-}
-.c_num{
-	width:84px; height:21px; overflow:hidden; border:1px solid #cccccc;
-}
-.car_ipt{
-	width:42px; height:21px; line-height:21px\9; background-color:#FFF; color:#555555; font-size:14px; text-align:center; font-family:"Microsoft YaHei"; float:left; padding:0; border:0;
-}
-.car_btn_1{
-	width:21px; height:21px; overflow:hidden; background:url(../Images/jian.gif) no-repeat center top; float:left; border:0; border-right:1px solid #cccccc; cursor:pointer;
-}
-.car_btn_2{
-	width:21px; height:21px; overflow:hidden; background:url(../Images/jia.gif) no-repeat center top; float:left; border:0; border-left:1px solid #cccccc; cursor:pointer;
-}
-.car_btn_bg{
-	background-color:#f0f0f0;
-}
-
-.two_bg{
-	overflow:hidden; padding-bottom:50px; margin-bottom:50px; border:1px solid #eaeaea;
-}
-.two_t{
-	width:1110px; height:35px; line-height:35px; overflow:hidden; color:#3e3e3e; font-size:16px; margin-top:15px;
-}
-.two_t span{
-	font-size:12px; font-family:"宋体"; color:#ff4e00;
-}
-.two_t span a{
-	color:#ff4e00;
-}
-
-table.peo_tab{
-	border-collapse:collapse; border:1px solid #eaeaea; font-family:"宋体"; font-size:14px;
-}
-table.peo_tab tr td{
-	border-collapse:collapse; border:1px solid #eaeaea; padding:10px 20px;
-}
-table.peo_tab tr td.p_td{
-	background-color:#f6f6f6; font-size:14px; font-family:"Microsoft YaHei"; text-align:right; padding-right:40px; padding-left:0;
-}
-
-ul.pay{
-	width:1110px; overflow:hidden; margin:0 auto;
-}
-ul.pay li{
-	height:38px; line-height:38px; overflow:hidden; font-size:14px; text-align:center; font-family:"Microsoft YaHei"; float:left; display:inline; margin-right:10px; margin-top:4px; margin-bottom:2px; padding:0 25px; border:1px solid #cccccc; cursor:pointer; position:relative;
-}
-ul.pay li:hover{
-	height:36px; line-height:36px; padding:0 24px; overflow:hidden; border:2px solid #ff4e00;
-}
-ul.pay li .ch_img{
-	width:18px; height:18px; overflow:hidden; background:url(../Images/ch.png) no-repeat center top; position:absolute; right:0; bottom:0; display:none;
-}
-ul.pay li.checked{
-	height:36px; line-height:36px; padding:0 24px; overflow:hidden; border:2px solid #ff4e00;
-}
-ul.pay li.checked .ch_img{
-	display:block;
-}
-
-.warning{
-	overflow:hidden; padding:20px 0 50px 0; margin-bottom:50px; border:1px solid #ff4e00;
-}
-.backs{
-	width:118px; height:28px; line-height:28px; overflow:hidden; font-size:14px; color:#555555; font-weight:bold; text-align:center; margin-top:15px; border:1px solid #cccccc;
-}
-.backs a{
-	color:#555555;
-}
 
 
 

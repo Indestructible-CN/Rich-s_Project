@@ -27,4 +27,6 @@ public interface Rt_Store_TypeMapper {
     int updateByPrimaryKeySelective(Rt_Store_Type record);
 
     int updateByPrimaryKey(Rt_Store_Type record);
+    
+    int insertSelectiveSub(Rt_Store_Type record);
 }

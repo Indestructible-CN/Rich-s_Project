@@ -30,7 +30,7 @@ window.onload = function(){
 			success : function(result) {
 				$.each(result, function(i, dom) {
 					if($(dom).size() == 0){
-						$('#tab_tbody').append("<tr><td colspan='5' align='center'>暂无数据</td></tr>");
+						$('#tab_tbody').append("<tr><td colspan='6' align='center'>暂无数据</td></tr>");
 					}else{
 						if(dom.gmtCreate !=  null){
 							var javaDate=dom.gmtCreate;
