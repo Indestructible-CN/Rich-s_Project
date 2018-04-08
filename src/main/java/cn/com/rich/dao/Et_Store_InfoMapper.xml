@@ -386,4 +386,18 @@
       gmt_create = #{gmtCreate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByKey" parameterType="map" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List"  />
+    <include refid="Blob_Column_List" />
+    from et_store_info
+    where 1 = 1 and IS_DELETE ="n"
+    <if test="key != null" >
+      and store_name LIKE '%' + #{key,jdbcType=VARCHAR} + '%'
+    </if>
+    <if test="start != null and end != null" >
+      limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+    </if>
+  </select>
 </mapper>

@@ -42,4 +42,6 @@ public interface Et_Store_InfoMapper {
     List<Et_Store_InfoWithBLOBs> selectByLmit(Map<String, Object> m);
     
     int selectByLmitCount(Map<String, Object> m);
+
+    List<Et_Store_InfoWithBLOBs> selectByKey(Map<String, Object> m);
 }

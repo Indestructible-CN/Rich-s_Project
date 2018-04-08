@@ -74,4 +74,16 @@ public class EtStoreInfoServiceImpl implements EtStoreInfoService {
 		return esim.selectByPrimaryKey(id);
 	}
 
+	/**
+	 * 商铺查询sql
+	 *
+	 * @param [Map]
+	 *            对应 Et_Store_InfoWithBLOBs 及对象 limit 对应 分页 开始 和 结束
+	 * @return 符合条件的对象集合
+	 */
+	@Override
+	public List<Et_Store_InfoWithBLOBs> selectByKey(Map<String, Object> m) {
+		return esim.selectByKey(m);
+	}
+
 }
