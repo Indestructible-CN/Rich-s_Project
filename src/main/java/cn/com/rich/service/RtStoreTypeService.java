@@ -2,7 +2,6 @@ package cn.com.rich.service;
 
 import java.util.List;
 
-import cn.com.rich.entity.Et_Store_Info;
 import cn.com.rich.entity.Rt_Store_Type;
 
 public interface RtStoreTypeService {
