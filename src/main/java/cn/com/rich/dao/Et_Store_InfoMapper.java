@@ -1,5 +1,6 @@
 package cn.com.rich.dao;
 
+import cn.com.rich.common.CommonDetailsKey;
 import cn.com.rich.entity.Et_Store_Info;
 import cn.com.rich.entity.Et_Store_InfoExample;
 import cn.com.rich.entity.Et_Store_InfoWithBLOBs;
@@ -42,4 +43,10 @@ public interface Et_Store_InfoMapper {
     List<Et_Store_InfoWithBLOBs> selectByLmit(Map<String, Object> m);
     
     int selectByLmitCount(Map<String, Object> m);
+    
+    List<Et_Store_InfoWithBLOBs> selectByTop();
+    
+    List<Et_Store_InfoWithBLOBs> selectByTime();
+    
+    CommonDetailsKey selectDetailByPrimaryKey(String id);
 }

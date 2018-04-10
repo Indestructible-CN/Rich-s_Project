@@ -136,7 +136,7 @@ table.c_tab tr th{
 	width:520px; height:65px; overflow:hidden; float:left; display:inline; margin-left:134px; margin-top:50px;
 }
 .s_ipt{
-	width:408px; height:36px; line-height:36px\9; overflow:hidden; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:2px solid #ff4e00; border-right:0;
+	width:318px; height:36px; line-height:36px\9; overflow:hidden; color:#555555; font-size:14px; font-family:"Microsoft YaHei"; float:left; padding:0 10px; border:2px solid #ff4e00; border-right:0;
 }
 .s_btn{
 	width:90px; height:40px; line-height:40px\9; background-color:#ff4e00; color:#FFF; font-size:16px; font-family:"Microsoft YaHei"; text-align:center; float:left; border:0; cursor:pointer;
@@ -685,9 +685,7 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 .floor_num{
 	width:33px; height:34px; line-height:40px; overflow:hidden; background:url(../Images/floor.png) no-repeat center top; color:#FFF; font-size:14px; text-transform:uppercase; text-indent:6px; float:left; display:inline; margin-right:15px;
 }
-.fresh_left{
-	width:211px; height:441px; overflow:hidden; background-color:#a6e5be; float:left;
-}
+
 .fre_ban{
 	width:211px; height:286px; overflow:hidden;
 }
@@ -730,10 +728,10 @@ ul.menu_r li a:hover, ul.menu_r li a.now{
 }
 
 .fresh_mid{
-	width:989px; height:441px; overflow:hidden; background-color:#FFF; float:left;
+	width:1200px; height:441px; overflow:hidden; background-color:#FFF; float:left;
 }
 .fresh_mid ul li{
-	width:242px; height:220px; overflow:hidden; float:left; border-left:1px solid #eaeaea; border-bottom:1px solid #eaeaea;
+	width:238px; height:220px; overflow:hidden; float:left; border-left:1px solid #eaeaea; border-bottom:1px solid #eaeaea;
 }
 .fresh_mid ul li .name{
 	height:20px; line-height:20px; overflow:hidden; font-size:14px; text-indent:50px; margin-top:12px;
@@ -1399,13 +1397,22 @@ ul.cate_list li:hover .carbg a.j_car{
 .pages{
 	overflow:hidden; color:#888888; padding:20px 10px; text-align:right; font-size:16px; font-family:"宋体"; margin-top:20px;
 }
-.pages a{
+.pages button{
 	height:36px; line-height:36px; overflow:hidden; color:#666666; font-size:16px; text-align:center; display:inline-block; padding:0 12px; margin:0 4px; border:1px solid #cccccc; -webkit-border-radius:2px; -moz-border-radius:2px; border-radius:2px;
 }
-.pages a:hover, .pages a.cur{
+.pages button:hover, .pages button.cur{
 	color:#FFF; background-color:#ff4e00; border:1px solid #ff4e00;
 }
-.pages a.p_pre:hover{
+.pages input.p_pre:hover{
+	background-color:#eaeaea; color:#555555; border:1px solid #cccccc;
+}
+.pages input{
+	height:36px; line-height:36px; overflow:hidden; color:#666666; font-size:16px; text-align:center; display:inline-block; padding:0 12px; margin:0 4px; border:1px solid #cccccc; -webkit-border-radius:2px; -moz-border-radius:2px; border-radius:2px;
+}
+.pages input:hover, .pages input.cur{
+	color:#FFF; background-color:#ff4e00; border:1px solid #ff4e00;
+}
+.pages input.p_pre:hover{
 	background-color:#eaeaea; color:#555555; border:1px solid #cccccc;
 }
 

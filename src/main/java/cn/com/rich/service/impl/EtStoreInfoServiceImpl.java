@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cn.com.rich.common.CommonDetailsKey;
 import cn.com.rich.dao.Et_Store_InfoMapper;
 import cn.com.rich.entity.Et_Store_InfoWithBLOBs;
 import cn.com.rich.service.EtStoreInfoService;
@@ -72,6 +73,21 @@ public class EtStoreInfoServiceImpl implements EtStoreInfoService {
 	@Override
 	public Et_Store_InfoWithBLOBs selectByPrimaryKey(String id) {
 		return esim.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public List<Et_Store_InfoWithBLOBs> selectByTop() {
+		return esim.selectByTop();
+	}
+
+	@Override
+	public List<Et_Store_InfoWithBLOBs> selectByTime() {
+		return esim.selectByTime();
+	}
+
+	@Override
+	public CommonDetailsKey selectDetailByPrimaryKey(String id) {
+		return esim.selectDetailByPrimaryKey(id);
 	}
 
 }

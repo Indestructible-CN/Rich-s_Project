@@ -15,6 +15,20 @@
     <result column="store_address" property="storeAddress" jdbcType="LONGVARCHAR" />
     <result column="store_img" property="storeImg" jdbcType="LONGVARCHAR" />
   </resultMap>
+  <resultMap id="BaseResultMapDetailKey" type="cn.com.rich.common.CommonDetailsKey" >
+  	<id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="store_type_id" property="storeTypeId" jdbcType="VARCHAR" />
+    <result column="store_name" property="storeName" jdbcType="VARCHAR" />
+    <result column="store_phone" property="storePhone" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="CHAR" />
+    <result column="gmt_modify" property="gmtModify" jdbcType="TIMESTAMP" />
+    <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="store_describe" property="storeDescribe" jdbcType="LONGVARCHAR" />
+    <result column="store_address" property="storeAddress" jdbcType="LONGVARCHAR" />
+    <result column="store_img" property="storeImg" jdbcType="LONGVARCHAR" />
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="type_describe" property="typeDescribe" jdbcType="VARCHAR" />
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -258,7 +272,26 @@
     	and gmt_create = #{gmtCreate,jdbcType=VARCHAR} 
     </if>
   </select>
-  
+  <!-- 优质商家 -->
+  <select id="selectByTop" resultMap="ResultMapWithBLOBs">
+  SELECT 
+  e.id,e.store_type_id,e.store_name,e.store_describe,e.store_phone,e.store_address,e.store_img,e.is_delete,e.gmt_modify,e.gmt_create 
+  from et_store_info e,rt_top_store r 
+  where e.id = r.store_id and e.is_delete = "n" and r.is_delete = "n" ORDER BY r.top_weight desc limit 0,10;
+  </select>
+  <!-- 时间查找 -->
+  <select id="selectByTime" resultMap="ResultMapWithBLOBs" >
+    select 
+    <include refid="Base_Column_List"  /> 
+    <include refid="Blob_Column_List" /> 
+    from et_store_info 
+    where 1 = 1 and IS_DELETE ="n"  ORDER BY gmt_create desc limit 0,10;
+  </select>
+  <select id="selectDetailByPrimaryKey" resultMap="BaseResultMapDetailKey" parameterType="java.lang.String" >
+    SELECT e.id,e.store_type_id,e.store_name,e.store_describe,e.store_phone,e.store_address,e.store_img,e.is_delete,e.gmt_modify,e.gmt_create,r.type_name,r.type_describe
+	FROM et_store_info e , rt_store_type r 
+	WHERE e.store_type_id = r.id and e.id = #{id,jdbcType=VARCHAR}
+  </select>
   <select id="maxId" resultType="Integer" >
     select Max(CONVERT(ID,SIGNED)) from et_store_info
   </select>

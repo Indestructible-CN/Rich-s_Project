@@ -2,6 +2,7 @@ package cn.com.rich.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.com.rich.common.CommonCode;
+import cn.com.rich.common.CommonDetailsKey;
 import cn.com.rich.common.CommonSeachKeyEsi;
 import cn.com.rich.entity.Et_Store_InfoWithBLOBs;
 import cn.com.rich.service.EtStoreInfoService;
@@ -184,7 +186,6 @@ public class EtStoreInfoController {
 		rtMap.put("list", list);
 		JSONArray json = JSONArray.fromObject(rtMap);
 		rtCode = json.toString();
-		System.out.println(selectCount + "count->size" + list.size());
 		return rtCode;
 	}
 
@@ -381,5 +382,30 @@ public class EtStoreInfoController {
 		return rtCode;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/indexInit")
+	public String indexInit(Model model, HttpServletRequest request, HttpServletResponse response) {
+		String rtCode = "error";
+		List<Et_Store_InfoWithBLOBs> listTop = new ArrayList<Et_Store_InfoWithBLOBs>();
+		List<Et_Store_InfoWithBLOBs> listTime = new ArrayList<Et_Store_InfoWithBLOBs>();
+		listTop = etStoreInfoService.selectByTop();
+		listTime = etStoreInfoService.selectByTime();
+		Map<String, Object> rtMap = new HashMap<String, Object>();
+		rtMap.put("listTop", listTop);
+		rtMap.put("listTime", listTime);
+		JSONArray json = JSONArray.fromObject(rtMap);
+		rtCode = json.toString();
+		return rtCode;
+	}
 	
+	@ResponseBody
+	@RequestMapping("/detailInit")
+	public String detailInit(String id, Model model, HttpServletRequest request, HttpServletResponse response) {
+		String rtCode = "error";
+		CommonDetailsKey cdk = new CommonDetailsKey();
+		cdk = etStoreInfoService.selectDetailByPrimaryKey(id);
+		JSONArray json = JSONArray.fromObject(cdk);
+		rtCode = json.toString();
+		return rtCode;
+	}
 }

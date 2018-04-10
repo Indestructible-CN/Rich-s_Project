@@ -124,7 +124,7 @@ window.onload = function(){
 		$id = $(d).prev().val();
 		$topTag = $(d).parent().prev().prev().prev().prev().children().first().val();
 		$topWeight = $(d).parent().prev().prev().prev().children().first().val();
-		var par = /^-?\\d+$/;
+		var par = /^[0-9]*$/;
 		var msg = "确认修改吗？";
 		if($topTag == "" || $topTag == null){
 			alert("置顶描述不能为空");

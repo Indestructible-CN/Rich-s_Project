@@ -3,6 +3,7 @@ package cn.com.rich.service;
 import java.util.List;
 import java.util.Map;
 
+import cn.com.rich.common.CommonDetailsKey;
 import cn.com.rich.entity.Et_Store_InfoWithBLOBs;
 
 public interface EtStoreInfoService {
@@ -19,5 +20,9 @@ public interface EtStoreInfoService {
 	
 	public Et_Store_InfoWithBLOBs selectByPrimaryKey(String id);
 	
+	public List<Et_Store_InfoWithBLOBs> selectByTop();
+    
+	public List<Et_Store_InfoWithBLOBs> selectByTime();
 	
+	public CommonDetailsKey selectDetailByPrimaryKey(String id);
 }
