@@ -64,7 +64,7 @@
 	            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:20px;" cellspacing="0" cellpadding="0">
 	              <tr>
 	                <td width="72"></td>
-	                <td><h2>联系我们</h2>Tel：400-400-400</td>
+	                <td><h2>联系我们</h2>Tel：028-88733888</td>
 	              </tr>
 	              <tr>
 	                <td width="72"></td>
@@ -75,7 +75,8 @@
 	    </div>
 		<div class="btmbg">
 			<div class="btm">
-	        	备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2017-2018 邛崃市云联惠 All Rights Reserved. 复制必究 <br />
+	        	备案/许可证编号：   Copyright © 2017-2018 邛崃市云联惠 All Rights Reserved. 复制必究 <br />
+	        	地址：四川省邛崃市蓝光coco时代广场2楼
 	        </div>    	
 	    </div>
 	</body>

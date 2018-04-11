@@ -59,7 +59,7 @@
         <div class="logo"><a href="../index.jsp"><img src="../Picture/logo.png" /></a></div>
     </div>
 	<div class="login">
-    	<div class="log_img"><img src="../Picture/l_img.png" width="611" height="425" /></div>
+    	<div class="log_img"><img src="../Picture/ban3.jpg" width="611" height="425" /></div>
 		<div class="log_c">
         	<form method="post" action="../etAdminService/adminLogin.do">
             <table border="0" style="width:370px; font-size:14px; margin-top:30px;" cellspacing="0" cellpadding="0">
@@ -104,8 +104,3 @@
 <script src="../Scripts/zh_cn.js"></script>
 <![endif]-->
 </html>
-<!--
-本代码由js代码网网友上传，js代码网收集并编辑整理;
-尊重他人劳动成果;
-转载请保留js代码链接 - www.jsdaima.com
--->

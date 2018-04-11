@@ -100,14 +100,14 @@
 			                	"<div class='name'><a href='pages/Details.jsp?sId="+top.id+"'>"+top.storeName+"</a></div>"+
 			                    "<div class='price'>"+
 			                    "</div>"+
-			                    "<div class='img'><a href='pages/Details.jsp?sId="+top.id+"'><img src='Picture/"+top.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>");
+			                    "<div class='img'><a href='pages/Details.jsp?sId="+top.id+"'><img src='shopImg/"+top.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>");
 					});
 					$.each(dom.listTime, function(index, time) {
 						$("#listTime").append("<li style='width:238px;'>"+
 			                	"<div class='name'><a href='pages/Details.jsp?sId="+time.id+"'>"+time.storeName+"</a></div>"+
 			                    "<div class='price'>"+
 			                    "</div>"+
-			                    "<div class='img'><a href='pages/Details.jsp?sId="+time.id+"'><img src='Picture/"+time.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>");					
+			                    "<div class='img'><a href='pages/Details.jsp?sId="+time.id+"'><img src='shopImg/"+time.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>");					
 					});
 				});
 			},
@@ -166,9 +166,9 @@
     	<div class="banner">    	
             <div class="top_slide_wrap">
                 <ul class="slide_box bxslider">
-                    <li><img src="Picture/de2.jpg" width="740" height="401" /></li>
-                    <li><img src="Picture/ban1.jpg" width="740" height="401" /></li> 
-                    <li><img src="Picture/ban1.jpg" width="740" height="401" /></li> 
+                    <li><img src="Picture/ban1.jpg" width="740" height="401" /></li>
+                    <li><img src="Picture/ban2.jpg" width="740" height="401" /></li> 
+                    <li><img src="Picture/ban3.jpg" width="740" height="401" /></li> 
                 </ul>	
                 <div class="op_btns clearfix">
                     <a href="#" class="op_btn op_prev"><span></span></a>
@@ -191,7 +191,7 @@
             	<span class="fr"><a href="#"> ></a></span>公告
             </div>
             <div style="margin: 4px; height: 260px;" id="notice1"></div>
-            <div style="margin: 0px; height:91px; color: white; font: 15px; background-color:#FF4E00; ">　　我们的服务热线：4000-5555</div>
+            <div style="margin: 0px; height:91px; color: white; font: 15px; background-color:#FF4E00; ">　　我们的服务热线：028-88733888</div>
         </div>
     </div>
     
@@ -250,7 +250,7 @@
 	            <table border="0" style="width:210px; height:62px; float:left; margin-left:75px; margin-top:20px;" cellspacing="0" cellpadding="0">
 	              <tr>
 	                <td width="72"></td>
-	                <td><h2>联系我们</h2>Tel：400-400-400</td>
+	                <td><h2>联系我们</h2>Tel：028-88733888</td>
 	              </tr>
 	              <tr>
 	                <td width="72"></td>
@@ -261,7 +261,8 @@
 	    </div>
 		<div class="btmbg">
 			<div class="btm">
-	        	备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com   Copyright © 2017-2018 邛崃市云联惠 All Rights Reserved. 复制必究 <br />
+	        	备案/许可证编号：   Copyright © 2018 邛崃市云联惠 All Rights Reserved. 复制必究 <br />
+	        	地址：四川省邛崃市蓝光coco时代广场2楼
 	        </div>    	
 	    </div>
     <!--End Footer End -->    

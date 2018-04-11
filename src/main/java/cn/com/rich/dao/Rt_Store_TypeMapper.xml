@@ -83,6 +83,7 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+    order by CAST(id as SIGNED INTEGER)
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 

@@ -54,11 +54,11 @@ $(document).ready(function(){
 				strs = dom.storeImg.split(",");
 				$.each(strs, function(index, dom) {
 					if(index == 1){
-						$("#liImg1").append("<img src='../Picture/"+strs[index]+"' width='460' height='460' />");
+						$("#liImg1").append("<img src='../shopImg/"+strs[index]+"' width='460' height='460' />");
 						
 					}
 					if(index != 0 && index != 1){
-						$("#liImg").append("<img src='../Picture/"+strs[index]+"' width='750' height='400' /><br /><br />");
+						$("#liImg").append("<img src='../shopImg/"+strs[index]+"' width='750' height='400' /><br /><br />");
 						
 					}
 				});
@@ -201,7 +201,7 @@ Date.prototype.format = function (format)
                 <ul>
                     <li>
                         <div class="name" style="margin-top: 30px;">请联系我们</div>
-                        <div class="price" style="margin-top: 30px;">热线电话：400-400-400</div>
+                        <div class="price" style="margin-top: 30px;">热线电话：028-88733888</div>
                     </li>
                 </ul>
             </div>

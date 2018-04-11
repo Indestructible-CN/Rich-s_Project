@@ -81,7 +81,7 @@
 					$.each(dom.listTime, function(index, time) {
 						if(index < 7){
 							$("#listTime").append("<li>"+
-				                    "<div class='img'><a href='Details.jsp?sId="+time.id+"'><img src='../Picture/"+time.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>"+
+				                    "<div class='img'><a href='Details.jsp?sId="+time.id+"'><img src='../shopImg/"+time.storeImg.split(",")[0]+"' width='185' height='155' /></a></div>"+
 				                	"<div class='name'><a href='Details.jsp?sId="+time.id+"'>"+time.storeName+"</a></div>"+
 				                    "<div class='price'>"+time.storePhone+
 				                    "</div>"+
@@ -122,7 +122,7 @@
 						}else{
 							$.each(dom.list,function(index,item){
 								$('#cate_list').append("<li>"+
-				                    	"<div class='img'><a href='Details.jsp?sId="+item.id+"'><img src='../Picture/"+item.storeImg.split(",")[0]+"' width='210' height='185' /></a></div>"+
+				                    	"<div class='img'><a href='Details.jsp?sId="+item.id+"'><img src='../shopImg/"+item.storeImg.split(",")[0]+"' width='210' height='185' /></a></div>"+
 				                        "<div class='price'>"+item.storeAddress+"</div>"+
 				                        "<div class='name'><a href='Details.jsp?sId="+item.id+"'>"+item.storeName+"</a></div>"+
 				                        "<div class='carbg'>"+
@@ -219,7 +219,7 @@
 						}else{
 							$.each(dom.list,function(index,item){
 								$('#cate_list').append("<li>"+
-				                    	"<div class='img'><a href='Details.jsp?sId="+item.id+"'><img src='../Picture/"+item.storeImg.split(",")[0]+"' width='210' height='185' /></a></div>"+
+				                    	"<div class='img'><a href='Details.jsp?sId="+item.id+"'><img src='../shopImg/"+item.storeImg.split(",")[0]+"' width='210' height='185' /></a></div>"+
 				                        "<div class='price'>"+item.storeAddress+"</div>"+
 				                        "<div class='name'><a href='Details.jsp?sId="+item.id+"'>"+item.storeName+"</a></div>"+
 				                        "<div class='carbg'>"+

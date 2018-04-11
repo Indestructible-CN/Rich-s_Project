@@ -153,7 +153,7 @@
 						<tr>
 							<td width="30%" height="30">商户描述</td>
 							<td width="70%" align="left"><textarea rows="5px"
-									style="resize: none" placeholder="请填写商户描述 最大长度100" cols="80px"  maxlength="100"
+									style="resize: none" placeholder="请填写商户描述 最大长度300" cols="80px"  maxlength="300"
 									id="storeDescribe" name="storeDescribe"></textarea></td>
 						</tr>
 					</table>

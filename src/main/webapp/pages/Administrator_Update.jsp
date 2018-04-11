@@ -409,7 +409,7 @@ $(document).ready(function(){
 					<tr>
 						<td width="30%" height="30">商户描述</td>
 						<td width="70%" align="left"><textarea style="resize: none;"
-								id="storeDescribe" placeholder="最大长度100" maxlength="100"
+								id="storeDescribe" placeholder="最大长度300" maxlength="300"
 								rows="5px" cols="80px"></textarea></td>
 					</tr>
 				</table>
