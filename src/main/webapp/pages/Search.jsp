@@ -24,7 +24,7 @@
 	<script>
 	//获取url中"?"符后的字串 
 	function GetRequest() {
-		var url = location.search;
+		var url = decodeURI(location.search);
 		var theRequest = new Object();
 		if (url.indexOf("?") != -1) {
 			var str = url.substr(1);

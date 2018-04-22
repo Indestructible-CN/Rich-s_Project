@@ -120,7 +120,8 @@
  		window.location.href="pages/Search.jsp?sId="+$(obj).children().first().attr('id');
  	}
  	function searchJump1() {
- 		window.location.href="pages/Search.jsp?sId=all&storeName="+$("#storeName").val();
+ 		window.open(encodeURI("pages/Search.jsp?sId=all&storeName="+$("#storeName").val()),"_blank",null,false)
+
  	}
  </script>
 </head>
