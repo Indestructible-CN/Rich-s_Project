@@ -312,6 +312,13 @@ public class EtStoreInfoController {
 			file.transferTo(dir);
 			File fromFile = new File(path+"/"+fileName);
 			File toFile = new File(pathBk+"/"+fileName);
+			if(!toFile.getParentFile().exists()){
+				System.out.println("找不到备份目录，进行创建备份目录");
+				if(!toFile.getParentFile().mkdirs()){
+					System.out.println("创建备份目录失败");
+				}
+				System.out.println("创建备份目录成功");
+			}
 			// 备份图片
 			CommonCode.copyFile(fromFile, toFile);
 			
